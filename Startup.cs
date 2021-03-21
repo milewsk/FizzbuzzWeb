@@ -8,7 +8,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using 
+using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 
 namespace FizzbuzzWeb
 {
@@ -25,6 +26,13 @@ namespace FizzbuzzWeb
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromSeconds(180);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
+            services.AddDistributedMemoryCache();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,6 +55,7 @@ namespace FizzbuzzWeb
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {

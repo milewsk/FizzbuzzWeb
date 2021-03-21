@@ -1,0 +1,21 @@
+﻿@page
+@model HistoriaModel
+@{
+    ViewData["Title"] = "Hisoria Fizzbuzz";
+}
+<h1>@ViewData["Title"]</h1>
+
+<p>Tu pojawiają się twoje ostatnie wyniki (180sekund).</p>
+
+@if(Model.calculate != null)
+{
+    <p>@Html.DisplayNameFor(model =>Model.calculate.Number) : @Model.calculate.Number</p>
+    <p>@Html.DisplayNameFor(model =>Model.calculate.Time) : @Model.calculate.Time</p>
+    <p>@Html.DisplayNameFor(model =>Model.calculate.Result) : @Model.calculate.ResultFF()  </p>
+}
+else
+{
+    <p>Brak wyniku</p>
+}
+
+

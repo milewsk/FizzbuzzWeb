@@ -5,6 +5,29 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4 m-2">Witaj w Fizzbuzz!</h1>
+    <h2 class="display-3">Podaj poniżej liczbę</h2>
+    <form method="post">
+        <div class="mx-auto m-2 mt-5">
+            <input asp-for="Calculate.Number" placeholder="Wpisz tutaj" />
+        </div>
+        <div class="mx-auto m-2">
+            <button class="btn btn-secondary">Zatwierdź</button>
+        </div>
+        <div class="mx-auto m-2">
+            <span asp-validation-for="Calculate.Number" class="text-danger"></span> <br />
+        </div>
+    </form>
+
+   
+
+       @if (Model.Calculate != null && Model.Calculate.ResultFF() != "")
+        {
+        <p>Otrzymano: @Model.Calculate.ResultFF()</p>
+        }
+        else if (Model.Calculate != null)
+        {
+        <p>Liczba: @Model.Calculate.Number nie spełnia kryteriów Fizz/buzz</p>
+        }
+    
 </div>
