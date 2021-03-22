@@ -5,17 +5,25 @@
 }
 <h1>@ViewData["Title"]</h1>
 
-<p>Tu pojawiają się twoje ostatnie wyniki (180sekund).</p>
+<div>
+    <p>Tu pojawiają się twoje ostatnie wyniki (180sekund).</p>
+</div>
 
-@if(Model.calculate != null)
+
+@if (HistoriaModel.myList != null)
+{ 
+
+foreach (var calc in HistoriaModel.myList)
 {
-    <p>@Html.DisplayNameFor(model =>Model.calculate.Number) : @Model.calculate.Number</p>
-    <p>@Html.DisplayNameFor(model =>Model.calculate.Time) : @Model.calculate.Time</p>
-    <p>@Html.DisplayNameFor(model =>Model.calculate.Result) : @Model.calculate.ResultFF()  </p>
-}
-else
-{
-    <p>Brak wyniku</p>
-}
+<div>
+    <p>@Html.DisplayNameFor(model => Model.calculate.Number) : @calc.Item1</p>
+    <p>@Html.DisplayNameFor(model => Model.calculate.Result): @calc.Item2</p>
+    <p>@Html.DisplayNameFor(model => Model.calculate.Time): @calc.Item3</p>
+</div>
 
-
+    }
+  
+}  else
+    {
+        <p>Brak wyniku</p>
+    }

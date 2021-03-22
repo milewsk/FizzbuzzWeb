@@ -18,12 +18,16 @@ namespace FizzbuzzWeb.Pages
         [BindProperty(SupportsGet = true)]
         public Calculate Calculate { get; set; }
 
+    //lista statyczna (aby się nie nadpisywała) int-numer string- result(sst), Datatime -czas
+
+        public static List<(int, string, DateTime)> List_of_calc = new List<(int, string,DateTime)>(15); 
+
         public IActionResult OnPost()
         {
             if (ModelState.IsValid)
             {
-                //Calculate.Calc(Calculate.Number);
-                HttpContext.Session.SetString("SessionKey", JsonConvert.SerializeObject(Calculate));
+                List_of_calc.Add((Calculate.Number, Calculate.ResultFF(),DateTime.Now));
+                HttpContext.Session.SetString("SessionKey", JsonConvert.SerializeObject(List_of_calc));
                 return Page(); 
             }
 

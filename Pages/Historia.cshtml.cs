@@ -18,6 +18,9 @@ namespace FizzbuzzWeb.Pages
 
         public Calculate calculate;
 
+        // Kolejny raz tworzę listę do przechowywania danych pomiędzy przesyłem post-get
+        public static List<(int, string, DateTime)> myList = new List<(int, string, DateTime)>(15);
+
         public HistoriaModel(ILogger<HistoriaModel> logger)
         {
             _logger = logger;
@@ -28,7 +31,7 @@ namespace FizzbuzzWeb.Pages
             var SessionKey = HttpContext.Session.GetString("SessionKey");
             if (SessionKey != null)
             {
-              calculate = JsonConvert.DeserializeObject<Calculate>(SessionKey);
+               myList = JsonConvert.DeserializeObject<List<(int, string, DateTime)>>(SessionKey);
             }
         }
     }

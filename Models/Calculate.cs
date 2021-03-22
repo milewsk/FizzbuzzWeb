@@ -8,7 +8,7 @@ namespace FizzbuzzWeb.Models
 {
     public class Calculate
     {
-        public string result;
+       public string result;
 
         public Calculate()
         {
@@ -28,9 +28,12 @@ namespace FizzbuzzWeb.Models
 
             if (Number > 0 && Number % 3 == 0)
             { sst = "Fizz"; }
-            else if (Number > 0 && Number % 5 == 0)
+            
+            if (Number > 0 && Number % 5 == 0)
             { sst = "Buzz"; }
-            else if (Number > 0 && Number % 5 == 0 && Number % 3 == 0) { sst = "Fizzbuzz"; }
+             
+            if (Number > 0 && Number % 5 == 0 && Number % 3 == 0) 
+            { sst = "Fizzbuzz"; }
 
             return sst;
         }
