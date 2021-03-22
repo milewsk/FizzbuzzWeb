@@ -23,11 +23,12 @@
 
        @if (Model.Calculate != null && Model.Calculate.ResultFF() != "")
         {
-        <p>Otrzymano: @Model.Calculate.ResultFF()</p>
+
+        <p class="text-success font-weight-bold">Otrzymano: @Model.Calculate.ResultFF()</p>
         }
         else if (Model.Calculate != null)
         {
-        <p>Liczba: @Model.Calculate.Number nie spełnia kryteriów Fizz/buzz</p>
+        <p class="text-warning font-weight-bold" >Liczba: @Model.Calculate.Number nie spełnia kryteriów Fizz/buzz</p>
         }
     
 </div>

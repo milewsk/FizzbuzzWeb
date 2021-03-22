@@ -3,9 +3,10 @@
 @{
     ViewData["Title"] = "Hisoria Fizzbuzz";
 }
-<h1>@ViewData["Title"]</h1>
+<div class="m-2 bg-light font-weight-bold">
+    <h1>@ViewData["Title"]</h1>
 
-<div>
+
     <p>Tu pojawiają się twoje ostatnie wyniki (180sekund).</p>
 </div>
 
@@ -15,9 +16,9 @@
 
 foreach (var calc in HistoriaModel.myList)
 {
-<div>
+<div class="m-2 bg-light font-weight-bold">
     <p>@Html.DisplayNameFor(model => Model.calculate.Number) : @calc.Item1</p>
-    <p>@Html.DisplayNameFor(model => Model.calculate.Result): @calc.Item2</p>
+    <p>@Html.DisplayNameFor(model => Model.calculate.Result):  <span class="font-italic text-success">@calc.Item2</span></p>
     <p>@Html.DisplayNameFor(model => Model.calculate.Time): @calc.Item3</p>
 </div>
 
