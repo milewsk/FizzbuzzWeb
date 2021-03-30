@@ -26,7 +26,9 @@ namespace FizzbuzzWeb.Pages
         {
             if (ModelState.IsValid)
             {
-                List_of_calc.Add((Calculate.Number, Calculate.ResultFF(),DateTime.Now));
+                Calculate.Result = Calculate.ResultFF();
+                Calculate.Time = DateTime.Now;
+                List_of_calc.Add((Calculate.Number,Calculate.Result, Calculate.Time));
                 HttpContext.Session.SetString("SessionKey", JsonConvert.SerializeObject(List_of_calc));
                 return Page(); 
             }
