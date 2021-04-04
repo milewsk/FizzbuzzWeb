@@ -10,7 +10,11 @@ namespace FizzbuzzWeb.Data
 {
     public class CalculateContext : DbContext
     {
+        public CalculateContext(DbContextOptions options) : base(options) { }
+
         public DbSet<Calculate> Calculates { get; set; }
+
+
 
     }
 }
