@@ -2,3 +2,54 @@
 @model FizzbuzzWeb.Pages.OstatnieModel
 @{
 }
+<!DOCTYPE html>
+    <html lang="en">
+
+        <div class="m-2  font-weight-bold">
+            <h1>@ViewData["Title"]</h1>
+
+
+            <p>To ostatnie 10 zarejestowanych wyników.</p>
+        </div>
+
+        <table class="table">
+            <thead>
+                <th>
+                    @Html.DisplayNameFor(model => model.Calculates[0].Number)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Calculates[0].Result)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Calculates[0].Time)
+                </th>
+            </thead>
+            <tbody>
+                @foreach(var item in Model.Calculates)
+                {
+
+                    // można sprawdzić czy działa tu sposób na iteracje na pętle
+                    //if break else
+                    
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Number)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.Result)
+                        </td> 
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Time)
+                        </td>
+                    </tr>
+                    
+                }
+
+            </tbody>
+        </table>
+
+
+
+
+
+    </html>
