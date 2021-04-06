@@ -1,0 +1,45 @@
+﻿@page
+@model FizzbuzzWeb.Pages.DeleteModel
+@{
+}
+
+<h1>Usuwanie zasobu</h1>
+
+<div>
+    <h3>Czy jesteś pewnien że chcesz usunąć ten zasób?</h3>
+
+    <table class="table">
+        <thead>
+        <th>
+            @Html.DisplayNameFor(model => model.Calculate.Number)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Calculate.Result)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Calculate.Time)
+        </th>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => modelItem.Calculate.Number)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => modelItem.Calculate.Result)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => modelItem.Calculate.Number)
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="text-center">
+        <form method="post">
+            <input type="hidden" asp-for="Calculate.Id" />
+            <input type="submit" class="alert-danger btn" value="Usuń" />
+            <a type="button" class="alert-info btn"  asp-page="/Ostatnie" />Powrót</a>
+        </form>
+
+    </div>
