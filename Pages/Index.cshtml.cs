@@ -41,7 +41,10 @@ namespace FizzbuzzWeb.Pages
                 //dodanie elementu nowego do bazy
                 _contextCalculate.Calculates.Add(Calculate);
                 _contextCalculate.SaveChanges();
-                
+             
+               
+
+
                 return Page(); 
             }
 
