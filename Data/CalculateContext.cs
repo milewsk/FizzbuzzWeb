@@ -14,7 +14,5 @@ namespace FizzbuzzWeb.Data
 
         public DbSet<Calculate> Calculates { get; set; }
 
-
-
     }
 }
