@@ -34,7 +34,7 @@ namespace FizzbuzzWeb.Pages
                 //szukanie podanego id w bazie
                 Calculate = await _context.Calculates.FindAsync(keyValues: id);
 
-                //jeœli jakimœ cudem nie istnieje
+                //jeœli jakimœ  cudem nie istnieje
                 if(Calculate == null)
                 {
                     return NotFound();
