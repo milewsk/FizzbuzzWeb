@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using FizzbuzzWeb.Models;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
+using FizzbuzzWeb.Data;
 
 namespace FizzbuzzWeb.Pages
 {
@@ -15,32 +16,51 @@ namespace FizzbuzzWeb.Pages
     {
         private readonly ILogger<IndexModel> _logger;
 
+
         [BindProperty(SupportsGet = true)]
         public Calculate Calculate { get; set; }
 
-    //lista statyczna (aby się nie nadpisywała) int-numer string- result(sst), Datatime -czas
+        private readonly CalculateContext _contextCalculate;
 
-        public static List<(int, string, DateTime)> List_of_calc = new List<(int, string,DateTime)>(15); 
+        //lista statyczna (aby się nie nadpisywała) int-numer string- result(sst), Datatime -czas
+
+        public static List<(int, string, DateTime)> List_of_calc = new List<(int, string,DateTime)>(15);
+
+        public IList<Calculate> Calculates { get; set; }
 
         public IActionResult OnPost()
         {
             if (ModelState.IsValid)
             {
-                List_of_calc.Add((Calculate.Number, Calculate.ResultFF(),DateTime.Now));
+                //sesja
+                Calculate.Result = Calculate.ResultFF();
+                Calculate.Time = DateTime.Now;
+                List_of_calc.Add((Calculate.Number,Calculate.Result, Calculate.Time));
                 HttpContext.Session.SetString("SessionKey", JsonConvert.SerializeObject(List_of_calc));
+
+                //dodanie elementu nowego do bazy
+                _contextCalculate.Calculates.Add(Calculate);
+                _contextCalculate.SaveChanges();
+             
+               
+
+
                 return Page(); 
             }
 
             return Page();
         }
 
-        public IndexModel(ILogger<IndexModel> logger)
+        public IndexModel(ILogger<IndexModel> logger, CalculateContext context)
         {
             _logger = logger;
+            _contextCalculate = context;
         }
 
         public void OnGet()
         {
+            var Calculate_list_DB = from calc in _contextCalculate.Calculates select calc;
+            Calculates = Calculate_list_DB.ToList();
 
         }
     }

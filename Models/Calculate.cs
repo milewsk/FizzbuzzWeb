@@ -7,21 +7,17 @@ using System.ComponentModel.DataAnnotations;
 namespace FizzbuzzWeb.Models
 {
     public class Calculate
-    {
-       public string result;
 
-        public Calculate()
-        {
-            this.Time = DateTime.Now;
-            this.Number = Number;  
-        }
+    {
+        public int Id { get; set; }
 
         [Range(1,1000, ErrorMessage ="Podaj liczbe z przedziału [1...1000]")]
         public int Number { get; set; }
-
+     
+        public string Result { get; set; }
+     
         public DateTime Time { get; set; }
 
-        public string Result { get; set; }
         public string ResultFF()
         {
             string sst = "";

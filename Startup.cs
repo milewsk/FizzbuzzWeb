@@ -10,6 +10,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
+using FizzbuzzWeb.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace FizzbuzzWeb
 {
@@ -33,6 +35,13 @@ namespace FizzbuzzWeb
                 options.Cookie.IsEssential = true;
             });
             services.AddDistributedMemoryCache();
+
+            services.AddDbContext<CalculateContext>(options =>
+            {
+                options.UseSqlServer(Configuration.GetConnectionString("FizzbuzzDB"));
+            });
+
+           
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
