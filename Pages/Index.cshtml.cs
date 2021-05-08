@@ -9,6 +9,7 @@ using FizzbuzzWeb.Models;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using FizzbuzzWeb.Data;
+using Microsoft.AspNetCore.Identity;
 
 namespace FizzbuzzWeb.Pages
 {
@@ -21,6 +22,10 @@ namespace FizzbuzzWeb.Pages
         public Calculate Calculate { get; set; }
 
         private readonly CalculateContext _contextCalculate;
+
+        private readonly UserManager<IdentityUser> _userManager;
+
+        private readonly SignInManager<IdentityUser> _signInManager;
 
         //lista statyczna (aby się nie nadpisywała) int-numer string- result(sst), Datatime -czas
 
@@ -39,8 +44,17 @@ namespace FizzbuzzWeb.Pages
                 HttpContext.Session.SetString("SessionKey", JsonConvert.SerializeObject(List_of_calc));
 
                 //dodanie elementu nowego do bazy
-                _contextCalculate.Calculates.Add(Calculate);
-                _contextCalculate.SaveChanges();
+
+                if (_signInManager.IsSignedIn(User)) {
+
+                    Calculate.user = 
+
+                    _contextCalculate.Calculates.Add(Calculate);
+                    _contextCalculate.SaveChanges();
+
+                }
+
+               
              
                
 
@@ -51,10 +65,13 @@ namespace FizzbuzzWeb.Pages
             return Page();
         }
 
-        public IndexModel(ILogger<IndexModel> logger, CalculateContext context)
+        public IndexModel(ILogger<IndexModel> logger, CalculateContext context,
+            SignInManager<IdentityUser> signInManager, UserManager<IdentityUser> userManager)
         {
             _logger = logger;
             _contextCalculate = context;
+            _signInManager = signInManager;
+            _userManager = userManager;
         }
 
         public void OnGet()

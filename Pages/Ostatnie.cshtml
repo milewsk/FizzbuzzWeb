@@ -5,54 +5,55 @@
 <!DOCTYPE html>
     <html lang="en">
         <body>
-        <div class="m-2  font-weight-bold">
-            <h1>@ViewData["Title"]</h1>
-            <p>To ostatnie 10 zarejestowanych wyników.</p>
-        </div>
+          
+                <div class="m-2  font-weight-bold">
+                    <h1>@ViewData["Title"]</h1>
+                    <p>To ostatnie 10 zarejestowanych wyników.</p>
+                </div>
 
-        <table class="table text-center">
-            <thead>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Calculates[0].Number)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Calculates[0].Result)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Calculates[0].Time)
-                    </th>
-                    <th>
-                        <p>Opcje</p>
-                    </th>
-            </thead>
-            <tbody>
-                @foreach(var item in Model.Calculates)
-                {
+                <table class="table text-center">
+                    <thead>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Calculates[0].Number)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Calculates[0].Result)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Calculates[0].Time)
+                            </th>
+                            <th>
+                                <p>Opcje</p>
+                            </th>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Calculates)
+                        {
 
-                    // można sprawdzić czy działa tu sposób na iteracje na pętle
-                    //if break else
-                    
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Number)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Result)
-                        </td> 
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Time)
-                        </td>
-                        <td>
-                            <a type="button" class="btn alert-danger" asp-page="/Delete"  asp-route-id="@item.Id">Usuń</a>
-                        </td>
-                    </tr>
-                    
-                }
+                            // można sprawdzić czy działa tu sposób na iteracje na pętle
+                            //if break else
 
-            </tbody>
-        </table>
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Number)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Result)
+                                </td> 
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Time)
+                                </td>
+                                <td>
+                                    <a type="button" class="btn alert-danger" asp-page="/Delete"  asp-route-id="@item.Id">Usuń</a>
+                                </td>
+                            </tr>
 
+                        }
 
+                    </tbody>
+                </table>
+
+            
 
 
             </body>

@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using FizzbuzzWeb.Data;
 using Microsoft.EntityFrameworkCore;
 using FizzbuzzWeb.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FizzbuzzWeb.Pages
 {
+     [Authorize]
     public class OstatnieModel : PageModel
     {
         // po³¹czenie contextu 
