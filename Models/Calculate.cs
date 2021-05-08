@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using FizzbuzzWeb.Areas.Identity.Data;
+using Microsoft.AspNetCore.Identity;
 
 namespace FizzbuzzWeb.Models
 {
@@ -20,7 +21,7 @@ namespace FizzbuzzWeb.Models
         public DateTime Time { get; set; }
 
         // string alb indentyuser
-        public ApplicationUser user { get; set; }
+        public string UserName { get; set; }
 
         public string ResultFF()
         {

@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using FizzbuzzWeb.Data;
 using Microsoft.EntityFrameworkCore;
+using FizzbuzzWeb.Areas.Identity.Data;
 
 namespace FizzbuzzWeb
 {
@@ -41,7 +42,9 @@ namespace FizzbuzzWeb
                 options.UseSqlServer(Configuration.GetConnectionString("FizzbuzzDB"));
             });
 
-           
+       
+
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

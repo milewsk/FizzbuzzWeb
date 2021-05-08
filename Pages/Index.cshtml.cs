@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using FizzbuzzWeb.Data;
 using Microsoft.AspNetCore.Identity;
+using FizzbuzzWeb.Areas.Identity.Data;
 
 namespace FizzbuzzWeb.Pages
 {
@@ -23,15 +24,25 @@ namespace FizzbuzzWeb.Pages
 
         private readonly CalculateContext _contextCalculate;
 
-        private readonly UserManager<IdentityUser> _userManager;
+        private  UserManager<ApplicationUser> _userManager;
 
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private  SignInManager<ApplicationUser> _signInManager;
 
         //lista statyczna (aby się nie nadpisywała) int-numer string- result(sst), Datatime -czas
 
-        public static List<(int, string, DateTime)> List_of_calc = new List<(int, string,DateTime)>(15);
+        public static List<(int, string, DateTime, string)> List_of_calc = new List<(int, string,DateTime, string)>(15);
 
         public IList<Calculate> Calculates { get; set; }
+
+
+        public IndexModel(ILogger<IndexModel> logger, CalculateContext context, SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager)
+        {
+            _logger = logger;
+            _contextCalculate = context;
+            _userManager = userManager;
+            _signInManager = signInManager;
+
+        }
 
         public IActionResult OnPost()
         {
@@ -40,23 +51,22 @@ namespace FizzbuzzWeb.Pages
                 //sesja
                 Calculate.Result = Calculate.ResultFF();
                 Calculate.Time = DateTime.Now;
-                List_of_calc.Add((Calculate.Number,Calculate.Result, Calculate.Time));
-                HttpContext.Session.SetString("SessionKey", JsonConvert.SerializeObject(List_of_calc));
+                Calculate.UserName = "";
 
                 //dodanie elementu nowego do bazy
 
                 if (_signInManager.IsSignedIn(User)) {
 
-                    Calculate.user = 
-
+                    Calculate.UserName = User.Identity.Name.ToString();
                     _contextCalculate.Calculates.Add(Calculate);
                     _contextCalculate.SaveChanges();
 
                 }
 
-               
-             
-               
+                List_of_calc.Add((Calculate.Number, Calculate.Result, Calculate.Time,Calculate.UserName));
+                HttpContext.Session.SetString("SessionKey", JsonConvert.SerializeObject(List_of_calc));
+
+
 
 
                 return Page(); 
@@ -65,14 +75,7 @@ namespace FizzbuzzWeb.Pages
             return Page();
         }
 
-        public IndexModel(ILogger<IndexModel> logger, CalculateContext context,
-            SignInManager<IdentityUser> signInManager, UserManager<IdentityUser> userManager)
-        {
-            _logger = logger;
-            _contextCalculate = context;
-            _signInManager = signInManager;
-            _userManager = userManager;
-        }
+       
 
         public void OnGet()
         {
