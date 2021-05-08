@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using FizzbuzzWeb.Areas.Identity.Data;
 
 namespace FizzbuzzWeb.Models
 {
@@ -17,6 +18,9 @@ namespace FizzbuzzWeb.Models
         public string Result { get; set; }
      
         public DateTime Time { get; set; }
+
+        // string alb indentyuser
+        public ApplicationUser user { get; set; }
 
         public string ResultFF()
         {

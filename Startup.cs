@@ -50,6 +50,7 @@ namespace FizzbuzzWeb
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+              
             }
             else
             {
@@ -63,6 +64,8 @@ namespace FizzbuzzWeb
 
             app.UseRouting();
 
+            //dodanie autentykacji
+            app.UseAuthentication();
             app.UseAuthorization();
             app.UseSession();
 
